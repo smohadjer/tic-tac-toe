@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>React tic-tac-toe</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <!-- Babel Script -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      const app = document.getElementById('app');
+
+      function Board() {
+        const [next, setNext] = React.useState('X');
+        const [squares, setSquares] = React.useState(Array(9).fill(null));
+        React.useEffect(() => {
+          console.log('hello');
+          console.log(squares);
+        });
+
+        function handleClick(i) {
+          const tmp = [...squares];
+          tmp[i] = next
+          setSquares(tmp);
+          setNext(next === 'X' ? 'O' : 'X');
+        }
+
+        return (
+          <div className="board">
+            <div className="board-row">
+              <Square value={squares[0]} onSquareClick={() => {handleClick(0)}} />
+              <Square value={squares[1]} onSquareClick={() => {handleClick(1)}} />
+              <Square value={squares[2]} onSquareClick={() => {handleClick(2)}} />
+            </div>
+            <div className="board-row">
+              <Square value={squares[3]} onSquareClick={() => {handleClick(3)}} />
+              <Square value={squares[4]} onSquareClick={() => {handleClick(4)}} />
+              <Square value={squares[5]} onSquareClick={() => {handleClick(5)}} />
+            </div>
+            <div className="board-row">
+              <Square value={squares[6]} onSquareClick={() => {handleClick(6)}} />
+              <Square value={squares[7]} onSquareClick={() => {handleClick(7)}} />
+              <Square value={squares[8]} onSquareClick={() => {handleClick(8)}} />
+            </div>
+          </div>
+        )
+      }
+
+      function Square({value, onSquareClick}) {
+        //const [value, setValue] = React.useState(null);
+
+        return (
+          <button className="square" onClick={onSquareClick}>{value}</button>
+        )
+      }
+
+      ReactDOM.render(<Board />, app);
+    </script>
+  </body>
+</html>
