@@ -71,6 +71,10 @@ body {
   width: 34px;
 }
 
+.square.won {
+  background: #89CFF0;
+}
+
 .board-row:after {
   clear: both;
   content: '';
