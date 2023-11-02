@@ -1,6 +1,8 @@
 <html>
   <head>
+    <meta charset="utf-8" />
     <title>React tic-tac-toe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -27,34 +29,13 @@
           setCurrentMove(nextMove);
         }
 
-        const moves = history.map((squares, move) => {
-          let description;
-          if (move === currentMove) {
-            description = 'You are at move #' + move;
-          } else {
-            if (move > 0) {
-              description = 'Go to move #' + move;
-            } else {
-              description = 'Go to game start';
-            }
-          }
-
-          return (
-            <li key={move}>
-              {(move === currentMove) ? <span>{description}</span> :
-                <button onClick={() => jumpTo(move)}>{description}</button>
-              }
-            </li>
-          );
-        });
-
         return (
           <div className="game">
             <div className="game-board">
               <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
             </div>
             <div className="game-info">
-              <ul>{moves}</ul>
+              <Moves history={history} currentMove={currentMove} jumpTo={jumpTo}/>
             </div>
           </div>
         );
@@ -110,10 +91,46 @@
       }
 
       function Square({value, onSquareClick}) {
-        //const [value, setValue] = React.useState(null);
-
         return (
           <button className="square" onClick={onSquareClick}>{value}</button>
+        )
+      }
+
+      function Moves({history, currentMove, jumpTo}) {
+        const [orderIsReversed, setOrderIsReversed] = React.useState(false);
+
+        function reverseOrder() {
+          setOrderIsReversed(!orderIsReversed);
+        }
+
+        const moves = history.map((squares, move) => {
+          let description;
+          if (move === currentMove) {
+            description = 'You are at move #' + move;
+          } else {
+            if (move > 0) {
+              description = 'Go to move #' + move;
+            } else {
+              description = 'Go to game start';
+            }
+          }
+
+          return (
+            <li key={move}>
+              {(move === currentMove) ? <span>{description}</span> :
+                <button onClick={() => jumpTo(move)}>{description}</button>
+              }
+            </li>
+          );
+        });
+
+        return (
+          <>
+            <button onClick={reverseOrder}>Reverse Order of Moves</button>
+            <ul>
+              {orderIsReversed ? [...moves].reverse() : moves}
+            </ul>
+          </>
         )
       }
 
