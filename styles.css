@@ -81,9 +81,14 @@ body {
   display: table;
 }
 
+.board {
+  min-width: 120px;
+}
+
 .status {
   margin-bottom: 10px;
 }
+
 .game {
   display: flex;
   flex-direction: row;
@@ -91,4 +96,16 @@ body {
 
 .game-info {
   margin-left: 20px;
+}
+
+.game-info span {
+  line-height: 1.5em;
+}
+
+.game-info h3 {
+  margin: 1em 0 0.25em;
+}
+
+.game-info ul {
+  margin: 0;
 }

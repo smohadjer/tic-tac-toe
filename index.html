@@ -14,10 +14,15 @@
       const app = document.getElementById('app');
 
       function Game() {
-        const [history, setHistory] = React.useState([Array(9).fill(null)]);
+        const [history, setHistory] = React.useState([
+          {
+            squares: Array(9).fill(null),
+            index: undefined
+          }
+        ]);
         const [currentMove, setCurrentMove] = React.useState(0);
         const xIsNext = currentMove % 2 === 0;
-        const currentSquares = history[currentMove];
+        const currentSquares = history[currentMove].squares;
 
         function handlePlay(nextSquares) {
           const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
@@ -58,7 +63,10 @@
 
           const nextSquares = [...squares];
           nextSquares[i] = xIsNext ? 'X' : 'O';
-          onPlay(nextSquares);
+          onPlay({
+            squares: nextSquares,
+            index: i
+          });
         }
 
         function getRowContent(i) {
@@ -106,13 +114,17 @@
           setOrderIsReversed(!orderIsReversed);
         }
 
-        const moves = history.map((squares, move) => {
+        const moves = history.map((historyObject, move) => {
+          const cells = ['row1, col1','row1, col2','row1, col3','row2, col1','row2, col2','row2, col3','row3, col1','row3, col2','row3, col3'];
+          const index = historyObject.index;
+          const info = ' (' + historyObject.squares[index] + ' at ' + cells[index] + ')';
           let description;
           if (move === currentMove) {
             description = 'You are at move #' + move;
+            if (move > 0) description += info;
           } else {
             if (move > 0) {
-              description = 'Go to move #' + move;
+              description = 'Go to move #' + move + info;
             } else {
               description = 'Go to game start';
             }
@@ -130,6 +142,7 @@
         return (
           <>
             <button onClick={reverseOrder}>Reverse Order of Moves</button>
+            <h3>Moves</h3>
             <ul>
               {orderIsReversed ? [...moves].reverse() : moves}
             </ul>
