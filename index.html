@@ -43,8 +43,9 @@
 
       function Board({xIsNext, squares, onPlay}) {
         const {winner, lines} = calculateWinner(squares) || {};
-        const status = winner ? `Winner: ${winner}`
-          : `Next player: ${xIsNext ? 'X' : 'O'}`;
+        const status = winner ? `Winner: ${winner}` :
+          !squares.includes(null) ? 'It\'s a draw!' :
+          `Next player: ${xIsNext ? 'X' : 'O'}`;
 
         React.useEffect(() => {
           console.log('squares:', squares);
