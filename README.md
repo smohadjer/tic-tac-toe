@@ -1,7 +1,7 @@
-Implementation of tic-tac-toe game using different technologies such as vanilla js, react, angular, etc.
+Implementation of Tic-Tac-Toe game in different frameworks
 
-React version:
+React:
 https://smohadjer.github.io/tic-tac-toe/react
 
-No-framework JS:
-https://smohadjer.github.io/tic-tac-toe/no-framework/
+No-framework:
+https://smohadjer.github.io/tic-tac-toe/no-framework
