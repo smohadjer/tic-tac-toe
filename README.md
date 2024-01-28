@@ -1,7 +1,6 @@
-Implementation of Tic-Tac-Toe game in different frameworks
+Implementation of Tic-Tac-Toe game
 
 React:
 https://smohadjer.github.io/tic-tac-toe/react
 
-No-framework:
-https://smohadjer.github.io/tic-tac-toe/no-framework
+
